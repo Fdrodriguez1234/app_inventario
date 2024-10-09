@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Proveedor</h1>
+        <% if (typeof errorMessage !== 'undefined') { %>
+            <div class="alert alert-danger" role="alert">
+                <%= errorMessage %>
+            </div>
+        <% } %>
+        <form action="/proveedores/agregar_proveedores" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Direccion:</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Telefono:</label>
+                <input type="number" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado" required>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
+            <button type="submit">Agregar Proveedores</button>
+        </form>
+        <a href="/proveedores"><button>Volver a la lista de proveedores</button></a>
+    </div>
+</body>
+</html>

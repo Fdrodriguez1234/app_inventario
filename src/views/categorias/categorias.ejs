@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Categorías</title>
+    <link rel="stylesheet" href="/css/estilos_categorias.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Categorías</h1>
+        <a href="/categorias/agregar_categorias"><button>Agregar Categorías</button></a>
+
+        <h2>Categorías Registradas</h2>
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div id="alertMessage" class="alert alert-success" role="alert">
+                <%= message %>
+                <button type="button" class="close" aria-label="Close" onclick="this.parentElement.classList.add('fade-out'); setTimeout(() => this.parentElement.style.display='none', 700);">
+                    <span aria-hidden="true">&times;</span>
+                </button>            
+            </div>
+        <% } %>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoría Padre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="categoriasList">
+                <% if (categorias && categorias.length > 0) { %>
+                    <% categorias.forEach(categoria => { %>
+                        <tr>
+                            <td><%= categoria.id %></td>
+                            <td><%= categoria.nombre %></td>
+                            <td><%= categoria.descripcion %></td>
+                            <td><%= categoria.categoria_padre || 'Raíz' %></td>
+                            <td>
+                                <a href="/categorias/editar_categorias/<%= categoria.id %>"><button>Editar</button></a>
+                                <a href="#"><button>Eliminar</button></a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5">No hay Categorías registradas. ¡Agrega una!</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        // Esperar a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            const alertMessage = document.getElementById('alertMessage');
+            if (alertMessage) {
+                // Esperar 2 segundos (2000 ms) y luego añadir la clase fade-out
+                setTimeout(() => {
+                    alertMessage.classList.add('fade-out'); // Añadir clase para desvanecer
+                    // Esperar a que la transición termine antes de ocultar el elemento
+                    setTimeout(() => {
+                        alertMessage.style.display = 'none'; // Ocultar el mensaje
+                    }, 700); // Debe ser igual a la duración de la transición
+                }, 2000); // Cambia a 3000 para 3 segundos
+            }
+        });
+    </script>
+</body>
+</html>

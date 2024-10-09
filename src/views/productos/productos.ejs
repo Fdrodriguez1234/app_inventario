@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="/css/estilos_productos.css"> <!-- Asegúrate de tener un CSS para estilos -->
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Productos</h1>
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div id="alertMessage" class="alert alert-success" role="alert">
+                <%= message %>
+            </div>
+        <% } %>
+        
+        <a href="/productos/agregar_productos">
+            <button class="btn btn-agregar">Agregar Producto</button>
+        </a>
+        <h2>Productos Registrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Código de Barras</th>
+                    <th>SKU</th>
+                    <th>Proveedor</th>
+                    <th>Costo Unitario</th>
+                    <th>Precio de Venta</th>
+                    <th>Unidad de Medida</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="productosList">
+                <% if (productos && productos.length > 0) { %>
+                    <% productos.forEach(producto => { %>
+                        <tr>
+                            <td><%= producto.id %></td>
+                            <td><%= producto.nombre %></td>
+                            <td><%= producto.descripcion %></td>
+                            <td><%= producto.categoria_nombre %></td>
+                            <td><%= producto.codigo_barras %></td>
+                            <td><%= producto.sku %></td>
+                            <td><%= producto.proveedor_nombre %></td>
+                            <td><%= producto.costo_unitario %></td>
+                            <td><%= producto.precio_venta %></td>
+                            <td><%= producto.unidad_medida %></td>
+                            <td><%= producto.stock %></td>
+                            <td>
+                                <a href="/productos/editar_productos/<%= producto.id %>">
+                                    <button class="btn btn-editar">Editar</button>
+                                </a>
+                                <button class="btn btn-eliminar" onclick="eliminarProducto('<%= producto.id %>')">Eliminar</button>                            </td>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="11">No hay productos registrados. ¡Agrega uno!</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+        // Función para eliminar un producto
+        function eliminarProducto(id) {
+            if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+                fetch(`/productos/${id}`, {
+                    method: 'DELETE'
+                })
+                // Esperar la respuesta del servidor y actualizar la lista de productos
+               .then(response => response.json())
+                // Esperamos respuesta en JSON
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                        // Actualizamos la lista de productos
+                        actualizarTablaProductos(data.productos);
+
+                    } 
+                });
+            }
+        }
+
+        // Función para actualizar la tabla de productos
+        function actualizarTablaProductos(productos) {
+            const productosList = document.getElementById('productosList');
+            productosList.innerHTML = ''; // Limpiar la lista
+
+            if (!Array.isArray(productos) || productos.length === 0) {
+                productosList.innerHTML = '<tr><td colspan="7">No hay productos en la base de datos. Debes crear un Producto.</td></tr>';
+            } else {    
+                productos.forEach(producto => {
+                    const row = document.createElement('tr');
+                    
+                    // Crear HTML de cada fila
+                    row.innerHTML += `
+                        <td>${escapeHtml(producto.id)}</td>
+                        <td>${escapeHtml(producto.nombre)}</td>
+                        <td>${escapeHtml(producto.descripcion)}</td>
+                        <td>${escapeHtml(producto.categoria_nombre)}</td>
+                        <td>${escapeHtml(producto.codigo_barras)}</td>
+                        <td>${escapeHtml(producto.sku)}</td>
+                        <td>${escapeHtml(producto.proveedor_nombre)}</td>
+                        <td>${escapeHtml(producto.costo_unitario)}</td>
+                        <td>${escapeHtml(producto.precio_venta)}</td>
+                        <td>${escapeHtml(producto.unidad_medida)}</td>
+                        <td>${escapeHtml(producto.stock)}</td>
+                        <td>
+                            <a href="/productos/editar_productos/${escapeHtml(producto.id)}">
+                                <button class="btn btn-editar">Editar</button>
+                            </a>
+                            <button class="btn btn-eliminar" onclick="eliminarProducto(${escapeHtml(producto.id)})">Eliminar</button>
+                        </td>
+                    `;
+                    productosList.appendChild(row);
+                });
+            }
+        }
+
+        // Función para escapar caracteres peligrosos
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;',
+            };
+            return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+
+
+        // Esperar a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            const alertMessage = document.getElementById('alertMessage');
+            if (alertMessage) {
+                // Esperar 2 segundos (2000 ms) y luego añadir la clase fade-out
+                setTimeout(() => {
+                    alertMessage.classList.add('fade-out'); // Añadir clase para desvanecer
+                    // Esperar a que la transición termine antes de ocultar el elemento
+                    setTimeout(() => {
+                        alertMessage.style.display = 'none'; // Ocultar el mensaje
+                    }, 700); // Debe ser igual a la duración de la transición
+                }, 2000); // Cambia 2000 a 3000 para 3 segundos
+            }
+        });
+    </script>
+</body>
+</html>

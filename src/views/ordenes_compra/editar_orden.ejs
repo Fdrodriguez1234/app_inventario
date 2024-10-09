@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Orden de Compra</title>
+    <link rel="stylesheet" href="/css/estilos_ordenes_compra.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Orden de Compra</h1>
+        
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div id="alertMessage" class="alert alert-success" role="alert">
+                <%= message %>
+                <button type="button" class="close" aria-label="Close" onclick="this.parentElement.classList.add('fade-out'); setTimeout(() => this.parentElement.style.display='none', 700);">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+
+        <form action="/ordenes_compra/editar_orden/<%= orden.id %>" method="POST">
+            <div>
+                <label for="proveedorId">Proveedor:</label>
+                <select name="proveedorId" id="proveedorId" required>
+                    <% proveedores.forEach(proveedor => { %>
+                        <option value="<%= proveedor.id %>" <%= proveedor.id === orden.proveedor_id ? 'selected' : '' %>><%= proveedor.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div>
+                <label for="productoId">Producto:</label>
+                <select name="productoId" id="productoId" required>
+                    <% productos.forEach(producto => { %>
+                        <option value="<%= producto.id %>" <%= producto.id === orden.producto_id ? 'selected' : '' %>><%= producto.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" value="<%= orden.cantidad %>" required>
+            </div>
+            <div>
+                <label for="precioUnitario">Precio Unitario:</label>
+                <input type="number" name="precioUnitario" id="precioUnitario" value="<%= orden.precio_unitario %>" step="0.01" required>
+            </div>
+            <button type="submit">Actualizar Orden de Compra</button>
+        </form>
+
+        <a href="/ordenes_compra">Volver a la lista de órdenes de compra</a>
+    </div>
+</body>
+</html>

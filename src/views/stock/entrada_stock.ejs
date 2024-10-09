@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de Stock</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registrar Entrada de Stock</h1>
+        <form action="/stock/entrada_stock" method="POST">
+            <label for="producto">Producto:</label>
+            <select id="producto" name="productos_id" required>
+                <option value="">Selecciona un producto</option>
+                <% productos.forEach(producto => { %>
+                    <option value="<%= producto.id %>"><%= producto.nombre %></option>
+                <% }); %>
+            </select>
+
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" required>
+
+            <label for="stock_minimo">Stock Mínimo:</label>
+            <input type="number" id="stock_minimo" name="stock_minimo" required>
+
+            <div class="form-group">
+                <label for="tipo_movimiento">Tipo de Movimiento:</label>
+                <select id="tipo_movimiento" name="tipo_movimiento" required>
+                    <option value="">Selecciona un tipo de Movimiento</option>
+                    <option value="entrada">Entrada</option>
+                    <option value="salida">Salida</option>
+                </select>
+            </div>
+
+            <button type="submit">Registrar Entrada</button>
+        </form>
+        <p><a href="/stock">Volver a Stock</a></p>
+    </div>
+</body>
+</html>

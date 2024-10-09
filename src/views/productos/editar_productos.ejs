@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="/css/estilos_agregar_productos.css"> <!-- Asegúrate de tener un CSS para estilos -->
+
+</head>
+<body>
+    <div class="container">
+        <h1>Actualizar Producto</h1>
+    
+        <!-- Formulario para actualizar productos -->
+        <form action="/editar_productos/<%= producto.id %>" method="POST" class="form-producto"> <!-- Cambia la acción a actualizar_productos -->
+            <div class="form-group">
+                <label for="nombre">Nombre del Producto:</label>
+                <input type="text" id="nombre" name="nombre" value="<%= producto.nombre %>" placeholder="Ingresa el nombre del producto" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" rows="3" placeholder="Descripción del producto" required><%= producto.descripcion %></textarea>
+            </div>
+    
+            <div class="form-group">
+                <label for="categorias_id">Categoría:</label> 
+                <select id="categorias_id" name="categorias_id" required>
+                    <option value="">Selecciona una categoría</option>
+                    <% categorias.forEach(categoria => { %>
+                        <option value="<%= categoria.id %>" <%= categoria.id === producto.categorias_id ? 'selected' : '' %>><%= categoria.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="codigo_barras">Código de Barras:</label>
+                <input type="text" id="codigo_barras" name="codigo_barras" value="<%= producto.codigo_barras %>" placeholder="Escanea o ingresa el código de barras" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="sku">SKU:</label>
+                <input type="text" id="sku" name="sku" value="<%= producto.sku %>" placeholder="Ingresa el SKU" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="proveedor_id">Proveedor:</label> 
+                <select id="proveedor_id" name="proveedor_id" required>
+                    <option value="">Selecciona un proveedor</option>
+                    <% proveedores.forEach(proveedor => { %>
+                        <option value="<%= proveedor.id %>" <%= proveedor.id === producto.proveedor_id ? 'selected' : '' %>><%= proveedor.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="costo_unitario">Costo Unitario:</label>
+                <input type="number" id="costo_unitario" name="costo_unitario" value="<%= producto.costo_unitario %>" placeholder="Costo unitario del producto" step="0.01" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="precio_venta">Precio de Venta:</label>
+                <input type="number" id="precio_venta" name="precio_venta" value="<%= producto.precio_venta %>" placeholder="Precio de venta del producto" step="0.01" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="unidad_medida">Unidad de Medida:</label>
+                <select id="unidad_medida" name="unidad_medida" required>
+                    <option value="">Selecciona una unidad de medida</option>
+                    <option value="pieza" <%= producto.unidad_medida === 'pieza' ? 'selected' : '' %>>Pieza</option>
+                    <option value="kg" <%= producto.unidad_medida === 'kg' ? 'selected' : '' %>>Kilogramo</option>
+                    <option value="litro" <%= producto.unidad_medida === 'litro' ? 'selected' : '' %>>Litro</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="stock">Stock:</label> 
+                <input type="number" id="stock" name="stock" value="<%= producto.stock %>" placeholder="Ingresa la cantidad en stock" required>
+            </div>
+    
+            <button type="submit" class="btn-agregar">Actualizar Producto</button>
+            <a href="/productos" class="btn-cancelar">Cancelar</a>
+        </form>
+    </div>
+    
+</body>
+</html>

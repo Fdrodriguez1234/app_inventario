@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario Actual</title>
+    <link rel="stylesheet" href="/css/estilos_stock.css"> <!-- Asegúrate de tener un archivo de estilos -->
+</head>
+<body>
+    <div class="container">
+        <h1>Inventario Actual</h1>
+
+        <!-- Bar de búsqueda -->
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Buscar producto...">
+            <button onclick="searchProduct()">Buscar</button>
+        </div>
+
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div id="alertMessage" class="alert alert-danger" role="alert">
+                <%= message %>
+            </div>
+        <% } %>
+        <!-- Tabla de productos -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Stock Disponible</th>
+                    <th>Stock Mínimo</th>
+                    <th>Cantidad de Entrada/Salida</th>
+                    <th>Tipo de Movimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (stocks.length > 0) { %>
+                    <% stocks.forEach(stock => { %>
+                        <tr>    
+                            <td><%= stock.producto %></td>
+                            <td><%= stock.categoria %></td>
+                            <td><%= stock.stock_disponible %></td>
+                            <td><%= stock.stock_minimo %></td>
+                            <td><%= stock.movimiento_stock %></td>
+                            <td><%= stock.tipo_movimiento %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="6">No hay movimientos de stock registrados.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        
+        <a href="stock/entrada_stock">
+            <button>Registrar Entrada</button>
+        </a>
+        <button onclick="window.location.href='/salida'">Registrar Salida</button>
+        
+    </div>
+
+    <script>
+        // Función para buscar productos
+        function searchProduct() {
+            const query = document.getElementById('search').value;
+            // Lógica para filtrar productos en la tabla
+        }
+    </script>
+</body>
+</html>

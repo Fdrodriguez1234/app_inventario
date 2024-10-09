@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/estilos_proveedores.css">
+    <title>Gestión de Proveedores</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Proveedores</h1>
+        <a href="/agregar_proveedores"><button>Crear Proveedor</button></a>
+        
+        <h2>Lista de Proveedores</h2>
+        <% if (typeof message !== 'undefined') { %>
+            <div id="alertMessage" class="alert" role="alert">
+                <%= message %>
+            </div>
+        <% } %>
+        <% if (proveedores.length === 0) { %>
+            <p>No hay proveedores en la base de datos. Debes crear un Proveedor.</p>
+        <% } else { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="proveedoresList">
+                    <% proveedores.forEach(proveedor => { %>
+                        <tr>
+                            <td><%= proveedor.id %></td>
+                            <td><%= proveedor.nombre %></td>
+                            <td><%= proveedor.direccion %></td>
+                            <td><%= proveedor.telefono %></td>
+                            <td><%= proveedor.correo %></td>
+                            <td><%= proveedor.estado%></td>
+                            <td>
+                                <a href="/editar_proveedores/<%= proveedor.id %>"><button>Editar</button></a>
+                                <button onclick="eliminarProveedor('<%= proveedor.id %>')">Eliminar</button>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+    <script>
+        function eliminarProveedor(id) {
+            if (confirm("¿Estás seguro de que deseas eliminar este proveedor?")) {
+                fetch(`/proveedores/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())  // Esperamos respuesta en JSON
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);  // Muestra el mensaje de éxi
+                        // Actualizamos la tabla con los proveedores restantes
+                        actualizarTablaProveedores(data.proveedores);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un problema al eliminar el proveedor.');
+                });
+            }
+        }
+
+        function actualizarTablaProveedores(proveedores) {
+            const proveedoresList = document.getElementById('proveedoresList');
+            proveedoresList.innerHTML = '';  // Limpiar la tabla
+
+            if (proveedores.length === 0) {
+                proveedoresList.innerHTML = '<tr><td colspan="7">No hay proveedores en la base de datos. Debes crear un Proveedor.</td></tr>';
+            } else {
+                proveedores.forEach(proveedor => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${proveedor.id}</td>
+                        <td>${proveedor.nombre}</td>
+                        <td>${proveedor.direccion}</td>
+                        <td>${proveedor.telefono}</td>
+                        <td>${proveedor.correo}</td>
+                        <td>${proveedor.estado}</td>
+                        <td>
+                            <a href="/editar_proveedores/${proveedor.id}"><button>Editar</button></a>
+                            <a href="#" onclick="eliminarProveedor(${proveedor.id})"><button>Eliminar</button></a>
+                        </td>
+                    `;
+                    proveedoresList.appendChild(row);
+                });
+            }
+        }
+
+        // Esperar a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            const alertMessage = document.getElementById('alertMessage');
+            if (alertMessage) {
+                // Esperar 2 segundos (2000 ms) y luego añadir la clase fade-out
+                setTimeout(() => {
+                    alertMessage.classList.add('fade-out'); // Añadir clase para desvanecer
+                    // Esperar a que la transición termine antes de ocultar el elemento
+                    setTimeout(() => {
+                        alertMessage.style.display = 'none'; // Ocultar el mensaje
+                    }, 700); // Debe ser igual a la duración de la transición
+                }, 2000); // Cambia 2000 a 3000 para 3 segundos
+            }
+        });
+    </script>
+    
+</body>
+</html>

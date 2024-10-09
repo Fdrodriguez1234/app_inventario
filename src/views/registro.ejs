@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="/public/styles.css"> <!-- Asegúrate de tener un archivo de estilos -->
+</head>
+<body>
+    <div class="container">
+        <h1>Registro</h1>
+        <form action="/auth/registro" method="POST"> <!-- Cambia la acción según la ruta que uses -->
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" required>
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" required>
+
+            <label for="rol">Rol:</label>
+            <select id="rol" name="rol">
+                <option value="empleado" selected>Empleado</option>
+                <option value="administrador">Administrador</option>
+                <option value="auditor">Auditor</option>
+            </select>
+
+            <button type="submit">Registrar</button>
+        </form>
+        <p>¿Ya tienes una cuenta? <a href="/logueo">Iniciar sesión</a></p>
+    </div>
+</body>
+</html>

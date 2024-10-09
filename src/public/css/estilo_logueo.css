@@ -1,0 +1,46 @@
+body {
+    background-color: #f8f9fa; /* Fondo suave */
+}
+
+.container {
+    max-width: 400px; /* Ancho máximo del contenedor */
+    margin-top: 100px; /* Espaciado superior */
+    padding: 20px; /* Espaciado interno */
+    background-color: white; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+h1 {
+    text-align: center; /* Centrar el título */
+    color: #007bff; /* Color azul */
+}
+
+label {
+    font-weight: bold; /* Hacer las etiquetas más audaces */
+}
+
+input {
+    border-radius: 5px; /* Bordes redondeados para los campos */
+    border: 1px solid #ced4da; /* Bordes claros */
+    padding: 10px; /* Espaciado interno en los campos */
+    width: 100%; /* Ancho completo */
+    margin-bottom: 15px; /* Espaciado inferior */
+}
+
+button {
+    width: 100%; /* Botón de ancho completo */
+    background-color: #007bff; /* Color del botón */
+    color: white; /* Texto blanco en el botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+}
+
+button:hover {
+    background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
+
+.alert {
+    margin-bottom: 15px; /* Espaciado inferior de la alerta */
+}

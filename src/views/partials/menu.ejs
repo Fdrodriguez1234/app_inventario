@@ -1,0 +1,74 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"> <!-- Para los íconos -->
+
+<style>
+    #sidebar {
+    min-width: 250px;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: #007bff;
+    color: white;
+}
+
+.components {
+    padding: 20px 0;
+}
+
+.components a {
+    padding: 10px;
+    color: #333;
+    display: block;
+}
+
+.components a:hover {
+    background: #007bff;
+    color: white;
+}
+
+</style>
+<nav id="sidebar" class="bg-light">
+    <div class="sidebar-header">
+        <h3>Inventario App</h3>
+        <strong>IA</strong> <!-- Iniciales o logo -->
+    </div>
+    <ul class="list-unstyled components">
+        <li>
+            <a href="/auth/welcome"><i class="fas fa-home"></i> Bienvenido</a>
+        </li>
+        <li>
+            <a href="/productos"><i class="fas fa-box"></i> Productos</a>
+        </li>
+        <li>
+            <a href="/proveedores"><i class="fas fa-truck"></i> Proveedores</a>
+        </li>
+        <li>
+            <a href="/ventas"><i class="fas fa-shopping-cart"></i> Ventas</a>
+        </li>
+        <li>
+            <a href="/reportes"><i class="fas fa-chart-line"></i> Reportes</a>
+        </li>
+        <li>
+            <a href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+        </li>
+        <!-- Agrega más elementos según sea necesario -->
+    </ul>
+</nav>
+<div id="content">
+    <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>

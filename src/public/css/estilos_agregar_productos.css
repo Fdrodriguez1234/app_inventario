@@ -1,0 +1,128 @@
+
+body {
+    font-family: 'Roboto', sans-serif; /* Aplica la fuente seleccionada */
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 600px; /* Ancho máximo */
+    margin: 40px auto; /* Centrado y margen superior */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #e0e0e0; /* Bordes sutiles */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+    background-color: #ffffff; /* Color de fondo */
+}
+
+/* Título */
+h1 {
+    text-align: center; /* Centrar el título */
+    color: #333; /* Color del texto */
+    margin-bottom: 20px; /* Margen inferior */
+}
+
+/* Grupos de formulario */
+.form-group {
+    margin-bottom: 15px; /* Espacio entre grupos */
+}
+
+/* Etiquetas */
+label {
+    display: block; /* Asegura que las etiquetas se muestren en una nueva línea */
+    margin-bottom: 5px; /* Espaciado entre la etiqueta y el campo */
+    font-weight: bold; /* Negrita */
+    color: #555; /* Color del texto */
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%; /* Asegura que los campos ocupen todo el ancho */
+    padding: 12px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Bordes */
+    border-radius: 4px; /* Esquinas redondeadas */
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+/* Campos de entrada en foco */
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #007bff; /* Color de borde al enfocar */
+    outline: none; /* Quitar el contorno por defecto */
+}
+
+/* Estilo para el botón */
+.btn-agregar {
+    width: 80%; /* Botón ocupa todo el ancho */
+    background-color: #007bff; /* Color del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 12px; /* Espaciado interno */
+    border-radius: 4px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin: 2px;
+    font-size: 16px; /* Tamaño de fuente */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+/* Color del botón al pasar el cursor */
+.btn-agregar:hover {
+    background-color: transparent; /* Color al pasar el cursor */
+    color: #007bff; /* Color del texto al pasar el cursor */
+    border: 1px solid #007bff; /* Borde al pasar el cursor */
+}
+
+/* Estilo para el botón cancelar */
+.btn-cancelar {
+    width: 80%; /* Botón ocupa todo el ancho */
+    background-color: #dc3545; /* Color del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 12px; /* Espaciado interno */
+    border-radius: 4px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 16px; /* Tamaño de fuente */
+    text-align: center; /* Centrar texto */
+    display: inline-block; /* Hacer que el enlace se comporte como un botón */
+    text-decoration: none; /* Quitar subrayado */
+    margin: 2px;
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+/* Color del botón al pasar el cursor */
+.btn-cancelar:hover {
+    background-color: transparent; /* Color al pasar el cursor */
+    color: #dc3545; /* Color del texto al pasar el cursor */
+    border: 1px solid #dc3545; /* Borde al pasar el cursor */
+}
+
+
+/* Mensaje de alerta */
+.alert {
+    margin-top: 20px; /* Margen superior */
+    padding: 10px; /* Espaciado interno */
+    background-color: #f8d7da; /* Color de fondo */
+    color: #721c24; /* Color del texto */
+    border: 1px solid #f5c6cb; /* Bordes */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Estilo responsivo */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px; /* Reducir el espaciado interno en pantallas pequeñas */
+    }
+
+    h1 {
+        font-size: 24px; /* Ajustar tamaño de fuente del título */
+    }
+    .btn-agregar, .btn-cancelar {
+        width: 100%; /* Botones ocupan todo el ancho en pantallas pequeñas */
+    }
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Categoria</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Actualizar Categorias</h1>
+        <form action="/editar_categorias/<%= categoriaActual.id %>" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre de la Categoría:</label>
+                <input type="text" id="nombre" name="nombre" value="<%- categoriaActual.nombre %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" rows="3" placeholder="Descripción del producto" required><%= categoriaActual.descripcion %></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="idPadre">Categoría Padre:</label> 
+                <select id="idPadre" name="idPadre">
+                    <option value="">Selecciona la categoría padre</option>
+                    <% categorias.forEach(categoriaPadre => { %>
+                        <option value="<%= categoriaPadre.id %>" <%= categoriaPadre.id === categoriaActual.idPadre ? 'selected' : '' %>><%= categoriaPadre.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+            
+        
+            <button type="submit">Actualizar Categoría</button>
+            <a href="/categorias">Cancelar</a>
+        </form>
+        
+    </div>
+</body>
+</html>

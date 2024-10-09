@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órdenes de Compra</title>
+    <link rel="stylesheet" href="/css/estilos_ordenes_compra.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Órdenes de Compra</h1>
+        <a href="/ordenes_compra/agregar_orden"><button>Agregar Orden de Compra</button></a>
+        
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div id="alertMessage" class="alert alert-success" role="alert">
+                <%= message %>
+                <button type="button" class="close" aria-label="Close" onclick="this.parentElement.style.display='none';">&times;</button>
+            </div>
+        <% } %>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Proveedor</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (ordenes && ordenes.length > 0) { %>
+                    <% ordenes.forEach(orden => { %>
+                        <tr>
+                            <td><%= orden.id %></td>
+                            <td><%= orden.proveedorNombre %></td>
+                            <td><%= orden.fecha.toLocaleDateString() %></td>
+                            <td><%= orden.estado %></td>
+                            <td><%= orden.total.toFixed(2) %> $</td>
+                            <td>
+                                <a href="/ordenes_compra/editar_orden/<%= orden.id %>"><button>Editar</button></a>
+                                <a href="/ordenes_compra/eliminar_orden/<%= orden.id %>"><button>Eliminar</button></a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="6">No hay órdenes de compra registradas. ¡Agrega una!</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

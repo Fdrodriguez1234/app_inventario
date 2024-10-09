@@ -1,0 +1,99 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.alert {
+    background-color: #3ce753;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: opacity 0.7s ease; /* Transición para el desvanecimiento */
+}
+
+.alert.fade-out {
+    opacity: 0; /* Hace que el mensaje se desvanezca */
+}
+
+
+
+/* Botones de acciones */
+.actions button {
+    background-color: #27ae60;
+    margin-right: 10px;
+}
+
+.actions button:hover {
+    background-color: #2ecc71;
+}
+
+.actions .delete-button {
+    background-color: #e74c3c;
+}
+
+.actions .delete-button:hover {
+    background-color: #c0392b;
+}
